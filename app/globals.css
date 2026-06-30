@@ -1,0 +1,84 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+:root {
+  --bg: 247 248 249; /* paper-50 */
+  --surface: 255 255 255;
+  --surface-2: 238 241 243;
+  --border: 221 227 232;
+  --text: 15 20 25;
+  --text-dim: 51 71 90;
+}
+
+.dark {
+  --bg: 10 13 16; /* ink-950 */
+  --surface: 20 27 34; /* ink-850 */
+  --surface-2: 26 35 44; /* ink-800 */
+  --border: 36 50 64; /* ink-700 */
+  --text: 238 241 243;
+  --text-dim: 158 175 190;
+}
+
+html {
+  -webkit-text-size-adjust: 100%;
+}
+
+body {
+  background: rgb(var(--bg));
+  color: rgb(var(--text));
+  font-feature-settings: "ss01", "cv01";
+  -webkit-font-smoothing: antialiased;
+}
+
+@layer components {
+  .surface {
+    background: rgb(var(--surface));
+    border: 1px solid rgb(var(--border));
+  }
+  .surface-2 {
+    background: rgb(var(--surface-2));
+  }
+  .text-dim {
+    color: rgb(var(--text-dim));
+  }
+  .border-token {
+    border-color: rgb(var(--border));
+  }
+  .hairline {
+    border-color: rgb(var(--border));
+  }
+}
+
+/* Focus visibility — part of the quality floor. */
+*:focus-visible {
+  outline: 2px solid theme("colors.signal.DEFAULT");
+  outline-offset: 2px;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    transition-duration: 0.01ms !important;
+  }
+}
+
+/* Export / print: hide chrome, keep the report clean on paper. */
+@media print {
+  header,
+  button {
+    display: none !important;
+  }
+  body {
+    background: #fff;
+    color: #000;
+  }
+  .surface,
+  .surface-2 {
+    border: 1px solid #ddd !important;
+    background: #fff !important;
+    break-inside: avoid;
+  }
+}
